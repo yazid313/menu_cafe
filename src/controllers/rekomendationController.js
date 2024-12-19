@@ -1,9 +1,9 @@
-const { rekomendation } = require("../models");
-const fs = require("fs");
+import { rekomendationControl } from "../models/index.js";
+import fs from "fs";
 
 const getRekomendationAll = async (req, res) => {
   try {
-    const respon = await rekomendation.findAll();
+    const respon = await rekomendationControl.findAll();
     res.status(200).json(respon);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -11,7 +11,7 @@ const getRekomendationAll = async (req, res) => {
 };
 const getRekomendationAllById = async (req, res) => {
   try {
-    const respon = await rekomendation.findOne({
+    const respon = await rekomendationControl.findOne({
       where: {
         id: req.params.id,
       },
@@ -36,7 +36,9 @@ const createRekomendation = async (req, res) => {
     photo: req.file.filename,
   };
   try {
-    const newRekomendation = await rekomendation.create(rekomendationData);
+    const newRekomendation = await rekomendationControl.create(
+      rekomendationData
+    );
     res.status(201).json(newRekomendation);
   } catch (err) {
     if (req.file) {
@@ -59,11 +61,14 @@ const updateRekomendation = async (req, res) => {
     photo: req.file.filename,
   };
   try {
-    const newRekomendation = await rekomendation.update(rekomendationData, {
-      where: {
-        id: req.params.id,
-      },
-    });
+    const newRekomendation = await rekomendationControl.update(
+      rekomendationData,
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
     res.status(201).json(newRekomendation);
   } catch (err) {
     if (req.file) {
@@ -79,7 +84,7 @@ const updateRekomendation = async (req, res) => {
 
 const deleteRekomendationById = async (req, res) => {
   try {
-    const respon = await rekomendation.destroy({
+    const respon = await rekomendationControl.destroy({
       where: {
         id: req.params.id,
       },
@@ -90,7 +95,7 @@ const deleteRekomendationById = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getRekomendationAll,
   getRekomendationAllById,
   createRekomendation,

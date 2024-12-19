@@ -1,10 +1,10 @@
-const { food, user } = require("../models");
-const fs = require("fs");
+import { foodControl } from "../models/index.js";
+import fs from "fs";
 
 const foodIdValidator = async (req, res, next) => {
   try {
     // Gunakan Sequelize untuk mencari user berdasarkan user_id
-    const respon = await food.findOne({
+    const respon = await foodControl.findOne({
       where: {
         id: req.params.id,
       },
@@ -24,30 +24,9 @@ const foodIdValidator = async (req, res, next) => {
   }
 };
 
-const userIdValidator = async (req, res, next) => {
-  try {
-    const respon = await user.findOne({
-      where: {
-        id: req.body.user_id,
-      },
-    });
-    if (!respon) {
-      const result = req.file.filename;
-      if (fs.existsSync(`images/${result}`)) {
-        fs.unlinkSync(`images/${result}`);
-      }
-      return res.status(401).json({ massage: "user_id Tidak Terdaftar!" });
-    }
-    next();
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-    console.log(err);
-  }
-};
-
 const updateImageValidator = async (req, res, next) => {
   try {
-    const respon = await food.findOne({
+    const respon = await foodControl.findOne({
       attributes: ["photo"],
       where: {
         id: req.params.id,
@@ -68,7 +47,7 @@ const updateImageValidator = async (req, res, next) => {
 
 const deleteImageValidator = async (req, res, next) => {
   try {
-    const respon = await food.findOne({
+    const respon = await foodControl.findOne({
       attributes: ["photo"],
       where: {
         id: req.params.id,
@@ -92,7 +71,7 @@ const deleteIdValidator = async (req, res, next) => {
 
   try {
     // Gunakan Sequelize untuk mencari user berdasarkan user_id
-    const respon = await food.findByPk(id);
+    const respon = await foodControl.findByPk(id);
 
     if (!respon) {
       return res.status(401).json({ message: "id Tidak Terdaftar!" });
@@ -104,9 +83,8 @@ const deleteIdValidator = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export {
   foodIdValidator,
-  userIdValidator,
   updateImageValidator,
   deleteIdValidator,
   deleteImageValidator,

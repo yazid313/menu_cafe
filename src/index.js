@@ -1,27 +1,29 @@
-const bodyParser = require("body-parser");
-const express = require("express");
+import bodyParser from "body-parser";
+import express from "express";
+import morgan from "morgan";
+import cors from "cors";
+import routes from "./routes/index.js"; // Tambahkan ".js" untuk mendukung ES Modules
+
 const app = express();
 const port = 3000;
-const morgan = require("morgan");
-const cors = require("cors");
 
 app.use(express.static("images"));
 // app.use(express.static("public"));
 
-//parse aplikasion json
+// Debugging log
+
+// Parse aplikasi JSON
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 app.use(cors());
 
-//panggil routes
-const routes = require("./routes/index");
+// Panggil routes
 routes(app);
 
-//apapun yg dimasukan jika salah tampilkan:
+// Jika endpoint salah, tampilkan 404
 app.use((req, res) => {
-  res.status(404);
-  res.send("<h1>404</h1>");
+  res.status(404).send("<h1>404</h1>");
 });
 
 app.listen(port, () => {

@@ -1,18 +1,18 @@
-const { Router } = require("express");
-const {
+import { Router } from "express";
+import {
   getUserAll,
   createUser,
   updateUser,
   deleteUserById,
-} = require("../controllers/userController");
-const {
+} from "../controllers/userController.js";
+import {
   createUsernameValidator,
   createEmailValidator,
   userIdValidator,
   updateUsernameValidator,
   updateEmailValidator,
   deleteIdValidator,
-} = require("../validators/userValidation");
+} from "../validators/userValidation.js";
 
 const router = Router();
 
@@ -24,7 +24,7 @@ router.post(
   createEmailValidator,
   createUser
 );
-router.patch(
+router.put(
   "/update/:id",
   userIdValidator,
   updateUsernameValidator,
@@ -33,4 +33,4 @@ router.patch(
 );
 router.delete("/delete/:id", deleteIdValidator, deleteUserById);
 
-module.exports = router;
+export default router;

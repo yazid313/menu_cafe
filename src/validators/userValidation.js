@@ -1,8 +1,7 @@
-const { where } = require("sequelize");
-const { user } = require("../models");
+import { userControl } from "../models/index.js";
 
 const createUsernameValidator = async (req, res, next) => {
-  const respon = await user.findOne({
+  const respon = await userControl.findOne({
     attributes: ["username"],
     where: {
       username: req.body.username,
@@ -17,7 +16,7 @@ const createUsernameValidator = async (req, res, next) => {
 };
 
 const createEmailValidator = async (req, res, next) => {
-  const respon = await user.findOne({
+  const respon = await userControl.findOne({
     attributes: ["email"],
     where: {
       email: req.body.email,
@@ -36,7 +35,7 @@ const userIdValidator = async (req, res, next) => {
 
   try {
     // Gunakan Sequelize untuk mencari user berdasarkan user_id
-    const respon = await user.findByPk(id);
+    const respon = await userControl.findByPk(id);
 
     if (!respon) {
       return res.status(401).json({ message: "user_id Tidak Terdaftar!" });
@@ -54,7 +53,7 @@ const updateUsernameValidator = async (req, res, next) => {
 
   try {
     // Gunakan Sequelize untuk mencari user berdasarkan username
-    const respon = await user.findOne({ where: { username } });
+    const respon = await userControl.findOne({ where: { username } });
 
     // Periksa apakah username sudah ada
 
@@ -78,7 +77,7 @@ const updateEmailValidator = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const respon = await user.findOne({ where: { email } });
+    const respon = await userControl.findOne({ where: { email } });
 
     // Periksa apakah username sudah ada
 
@@ -102,7 +101,7 @@ const deleteIdValidator = async (req, res, next) => {
 
   try {
     // Gunakan Sequelize untuk mencari user berdasarkan user_id
-    const respon = await user.findByPk(id);
+    const respon = await userControl.findByPk(id);
 
     if (!respon) {
       return res.status(401).json({ message: "user_id Tidak Terdaftar!" });
@@ -114,7 +113,7 @@ const deleteIdValidator = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export {
   createUsernameValidator,
   createEmailValidator,
   userIdValidator,

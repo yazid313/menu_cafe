@@ -1,15 +1,15 @@
-const { user, akses_token } = require("../models");
-const jwt = require("jsonwebtoken");
-const config = require("../db/config/secret.js");
-const ip = require("ip");
-const { compare } = require("../validators/passwordValidation.js");
+import { userControl, tokenControl } from "../models/index.js";
+import jwt from "jsonwebtoken";
+import config from "../db/config/secret.js";
+import ip from "ip";
+import { compare } from "../validators/passwordValidation.js";
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     // Cari user berdasarkan email
-    const userData = await user.findOne({
+    const userData = await userControl.findOne({
       where: {
         email: email,
       },
@@ -22,7 +22,7 @@ const login = async (req, res) => {
       });
     }
 
-    // membandingkan kata sandi
+    // Membandingkan kata sandi
     const isPasswordValid = compare(password, userData.password);
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -37,7 +37,7 @@ const login = async (req, res) => {
     });
 
     // Simpan akses token
-    const accessToken = await akses_token.create({
+    await tokenControl.create({
       acces_token: token,
       expires: new Date(Date.now() + 1440 * 60 * 1000), // 24 jam dari sekarang
       ip_address: ip.address(),
@@ -51,7 +51,7 @@ const login = async (req, res) => {
       currUser: userData.id,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({
       error: true,
       message: "Terjadi kesalahan pada server.",
@@ -59,4 +59,4 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login };
+export default login;

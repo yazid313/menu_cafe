@@ -1,17 +1,19 @@
-const { user } = require("../models");
-const fs = require("fs");
+import { userControl } from "../models/index.js";
+import fs from "fs";
 
 const getUserAll = async (req, res) => {
   try {
-    const respon = await user.findAll();
+    // Pastikan memanggil model User di dalam db
+    const respon = await userControl.findAll();
     res.status(200).json(respon);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
+
 const getUserAllById = async (req, res) => {
   try {
-    const respon = await user.findOne({
+    const respon = await userControl.findOne({
       where: {
         id: req.params.id,
       },
@@ -28,8 +30,6 @@ const getUserAllById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  console.log(req.body, "pppp");
-
   const userData = {
     full_name: req.body.full_name,
     username: req.body.username,
@@ -37,7 +37,7 @@ const createUser = async (req, res) => {
     password: req.body.password,
   };
   try {
-    const newUser = await user.create(userData);
+    const newUser = await userControl.create(userData);
     res.status(201).json(newUser);
   } catch (err) {
     // if (req.file) {
@@ -59,7 +59,7 @@ const updateUser = async (req, res) => {
     password: req.body.password,
   };
   try {
-    const newUser = await user.update(userData, {
+    const newUser = await userControl.update(userData, {
       where: {
         id: req.params.id,
       },
@@ -79,7 +79,7 @@ const updateUser = async (req, res) => {
 
 const deleteUserById = async (req, res) => {
   try {
-    const respon = await user.destroy({
+    const respon = await userControl.destroy({
       where: {
         id: req.params.id,
       },
@@ -90,10 +90,4 @@ const deleteUserById = async (req, res) => {
   }
 };
 
-module.exports = {
-  getUserAll,
-  getUserAllById,
-  createUser,
-  updateUser,
-  deleteUserById,
-};
+export { getUserAll, getUserAllById, createUser, updateUser, deleteUserById };

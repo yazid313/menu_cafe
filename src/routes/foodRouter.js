@@ -1,38 +1,39 @@
-const { Router } = require("express");
-const {
+import { Router } from "express";
+import {
   getFoodAll,
   getFoodAllById,
   createFood,
   deleteFoodById,
   updateFood,
-} = require("../controllers/foodController.js");
-const upload = require("../validators/imageValidation.js");
-const {
+} from "../controllers/foodController.js";
+import upload from "../validators/imageValidation.js";
+import {
   updateImageValidator,
-  userIdValidator,
   foodIdValidator,
   deleteIdValidator,
   deleteImageValidator,
-} = require("../validators/foodValidation.js");
+} from "../validators/foodValidation.js";
+import { verifikasi2 } from "../validators/loginValidation.js";
 
 const router = Router();
 
 router.get("/", getFoodAll);
 router.get("/:id", getFoodAllById);
-router.post("/create", upload.single("photo"), userIdValidator, createFood);
+router.post("/create", upload.single("photo"), verifikasi2, createFood);
 router.put(
   "/update/:id",
   upload.single("photo"),
+  verifikasi2,
   foodIdValidator,
-  userIdValidator,
   updateImageValidator,
   updateFood
 );
 router.delete(
   "/delete/:id",
+  verifikasi2,
   deleteIdValidator,
   deleteImageValidator,
   deleteFoodById
 );
 
-module.exports = router;
+export default router;

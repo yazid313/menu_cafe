@@ -1,9 +1,9 @@
-const { snack } = require("../models");
-const fs = require("fs");
+import { snackControl } from "../models/index.js";
+import fs from "fs";
 
 const getSnackAll = async (req, res) => {
   try {
-    const respon = await snack.findAll();
+    const respon = await snackControl.findAll();
     res.status(200).json(respon);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -11,7 +11,7 @@ const getSnackAll = async (req, res) => {
 };
 const getSnackAllById = async (req, res) => {
   try {
-    const respon = await snack.findOne({
+    const respon = await snackControl.findOne({
       where: {
         id: req.params.id,
       },
@@ -35,7 +35,7 @@ const createSnack = async (req, res) => {
     photo: req.file.filename,
   };
   try {
-    const newSnack = await snack.create(snackData);
+    const newSnack = await snackControl.create(snackData);
     res.status(201).json(newSnack);
   } catch (err) {
     if (req.file) {
@@ -57,7 +57,7 @@ const updateSnack = async (req, res) => {
     photo: req.file.filename,
   };
   try {
-    const newSnack = await snack.update(snackData, {
+    const newSnack = await snackControl.update(snackData, {
       where: {
         id: req.params.id,
       },
@@ -77,7 +77,7 @@ const updateSnack = async (req, res) => {
 
 const deleteSnackById = async (req, res) => {
   try {
-    const respon = await snack.destroy({
+    const respon = await snackControl.destroy({
       where: {
         id: req.params.id,
       },
@@ -88,7 +88,7 @@ const deleteSnackById = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getSnackAll,
   getSnackAllById,
   createSnack,

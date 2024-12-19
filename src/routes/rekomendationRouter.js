@@ -1,19 +1,19 @@
-const { Router } = require("express");
-const {
+import { Router } from "express";
+import {
   getRekomendationAll,
   getRekomendationAllById,
   createRekomendation,
   deleteRekomendationById,
   updateRekomendation,
-} = require("../controllers/rekomendationController.js");
-const upload = require("../validators/imageValidation.js");
-const {
+} from "../controllers/rekomendationController.js";
+import upload from "../validators/imageValidation.js";
+import {
   rekomendationIdValidator,
-  userIdValidator,
   updateImageValidator,
   deleteIdValidator,
   deleteImageValidator,
-} = require("../validators/rekomendationValidation.js");
+} from "../validators/rekomendationValidation.js";
+import { verifikasi2 } from "../validators/loginValidation.js";
 
 const router = Router();
 
@@ -22,22 +22,23 @@ router.get("/:id", getRekomendationAllById);
 router.post(
   "/create",
   upload.single("photo"),
-  userIdValidator,
+  verifikasi2,
   createRekomendation
 );
 router.put(
   "/update/:id",
   upload.single("photo"),
+  verifikasi2,
   rekomendationIdValidator,
-  userIdValidator,
   updateImageValidator,
   updateRekomendation
 );
 router.delete(
   "/delete/:id",
+  verifikasi2,
   deleteIdValidator,
   deleteImageValidator,
   deleteRekomendationById
 );
 
-module.exports = router;
+export default router;

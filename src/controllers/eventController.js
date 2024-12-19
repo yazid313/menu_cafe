@@ -1,17 +1,17 @@
-const { contact } = require("../models");
-const fs = require("fs");
+import { eventControl } from "../models/index.js";
+import fs from "fs";
 
-const getContactAll = async (req, res) => {
+const getEventAll = async (req, res) => {
   try {
-    const respon = await contact.findAll();
+    const respon = await eventControl.findAll();
     res.status(200).json(respon);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
-const getContactAllById = async (req, res) => {
+const getEventAllById = async (req, res) => {
   try {
-    const respon = await contact.findOne({
+    const respon = await eventControl.findOne({
       where: {
         id: req.params.id,
       },
@@ -27,16 +27,16 @@ const getContactAllById = async (req, res) => {
   }
 };
 
-const createContact = async (req, res) => {
-  const contactData = {
+const createEvent = async (req, res) => {
+  const eventData = {
     user_id: req.body.user_id,
-    name: req.body.name,
-    values: req.body.values,
-    icon: req.file.filename,
+    title: req.body.title,
+    description: req.body.description,
+    photo: req.file.filename,
   };
   try {
-    const newContact = await contact.create(contactData);
-    res.status(201).json(newContact);
+    const newEvent = await eventControl.create(eventData);
+    res.status(201).json(newEvent);
   } catch (err) {
     if (req.file) {
       const result = req.file.filename;
@@ -49,20 +49,20 @@ const createContact = async (req, res) => {
   }
 };
 
-const updateContact = async (req, res) => {
-  const contactData = {
+const updateEvent = async (req, res) => {
+  const eventData = {
     user_id: req.body.user_id,
-    name: req.body.name,
-    values: req.body.values,
-    icon: req.file.filename,
+    title: req.body.title,
+    description: req.body.description,
+    photo: req.file.filename,
   };
   try {
-    const newContact = await contact.update(contactData, {
+    const newEvent = await eventControl.update(eventData, {
       where: {
         id: req.params.id,
       },
     });
-    res.status(201).json(newContact);
+    res.status(201).json(newEvent);
   } catch (err) {
     if (req.file) {
       const result = req.file.filename;
@@ -75,9 +75,9 @@ const updateContact = async (req, res) => {
   }
 };
 
-const deleteContactById = async (req, res) => {
+const deleteEventById = async (req, res) => {
   try {
-    const respon = await contact.destroy({
+    const respon = await eventControl.destroy({
       where: {
         id: req.params.id,
       },
@@ -88,10 +88,10 @@ const deleteContactById = async (req, res) => {
   }
 };
 
-module.exports = {
-  getContactAll,
-  getContactAllById,
-  createContact,
-  updateContact,
-  deleteContactById,
+export {
+  getEventAll,
+  getEventAllById,
+  createEvent,
+  updateEvent,
+  deleteEventById,
 };

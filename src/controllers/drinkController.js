@@ -1,9 +1,9 @@
-const { drink } = require("../models");
-const fs = require("fs");
+import { drinkControl } from "../models/index.js";
+import fs from "fs";
 
 const getDrinkAll = async (req, res) => {
   try {
-    const respon = await drink.findAll();
+    const respon = await drinkControl.findAll();
     res.status(200).json(respon);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -11,7 +11,7 @@ const getDrinkAll = async (req, res) => {
 };
 const getDrinkAllById = async (req, res) => {
   try {
-    const respon = await drink.findOne({
+    const respon = await drinkControl.findOne({
       where: {
         id: req.params.id,
       },
@@ -35,7 +35,7 @@ const createDrink = async (req, res) => {
     photo: req.file.filename,
   };
   try {
-    const newDrink = await drink.create(drinkData);
+    const newDrink = await drinkControl.create(drinkData);
     res.status(201).json(newDrink);
   } catch (err) {
     if (req.file) {
@@ -57,7 +57,7 @@ const updateDrink = async (req, res) => {
     photo: req.file.filename,
   };
   try {
-    const newDrink = await drink.update(drinkData, {
+    const newDrink = await drinkControl.update(drinkData, {
       where: {
         id: req.params.id,
       },
@@ -77,7 +77,7 @@ const updateDrink = async (req, res) => {
 
 const deleteDrinkById = async (req, res) => {
   try {
-    const respon = await drink.destroy({
+    const respon = await drinkControl.destroy({
       where: {
         id: req.params.id,
       },
@@ -88,7 +88,7 @@ const deleteDrinkById = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getDrinkAll,
   getDrinkAllById,
   createDrink,

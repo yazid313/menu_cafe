@@ -1,9 +1,9 @@
-const { food } = require("../models");
-const fs = require("fs");
+import { foodControl } from "../models/index.js";
+import fs from "fs";
 
 const getFoodAll = async (req, res) => {
   try {
-    const respon = await food.findAll();
+    const respon = await foodControl.findAll();
     res.status(200).json(respon);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -11,7 +11,7 @@ const getFoodAll = async (req, res) => {
 };
 const getFoodAllById = async (req, res) => {
   try {
-    const respon = await food.findOne({
+    const respon = await foodControl.findOne({
       where: {
         id: req.params.id,
       },
@@ -35,7 +35,7 @@ const createFood = async (req, res) => {
     photo: req.file.filename,
   };
   try {
-    const newFood = await food.create(foodData);
+    const newFood = await foodControl.create(foodData);
     res.status(201).json(newFood);
   } catch (err) {
     if (req.file) {
@@ -57,7 +57,7 @@ const updateFood = async (req, res) => {
     photo: req.file.filename,
   };
   try {
-    const newFood = await food.update(foodData, {
+    const newFood = await foodControl.update(foodData, {
       where: {
         id: req.params.id,
       },
@@ -77,7 +77,7 @@ const updateFood = async (req, res) => {
 
 const deleteFoodById = async (req, res) => {
   try {
-    const respon = await food.destroy({
+    const respon = await foodControl.destroy({
       where: {
         id: req.params.id,
       },
@@ -88,10 +88,4 @@ const deleteFoodById = async (req, res) => {
   }
 };
 
-module.exports = {
-  getFoodAll,
-  getFoodAllById,
-  createFood,
-  updateFood,
-  deleteFoodById,
-};
+export { getFoodAll, getFoodAllById, createFood, updateFood, deleteFoodById };
