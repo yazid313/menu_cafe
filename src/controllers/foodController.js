@@ -29,7 +29,6 @@ const getFoodAllById = async (req, res) => {
 
 const createFood = async (req, res) => {
   const foodData = {
-    user_id: req.body.user_id,
     title: req.body.title,
     harga: req.body.harga,
     photo: req.file.filename,
@@ -51,7 +50,6 @@ const createFood = async (req, res) => {
 
 const updateFood = async (req, res) => {
   const foodData = {
-    user_id: req.body.user_id,
     title: req.body.title,
     harga: req.body.harga,
     photo: req.file.filename,

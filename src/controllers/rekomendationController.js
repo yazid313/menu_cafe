@@ -29,7 +29,6 @@ const getRekomendationAllById = async (req, res) => {
 
 const createRekomendation = async (req, res) => {
   const rekomendationData = {
-    user_id: req.body.user_id,
     title: req.body.title,
     harga: req.body.harga,
     description: req.body.description,
@@ -54,7 +53,6 @@ const createRekomendation = async (req, res) => {
 
 const updateRekomendation = async (req, res) => {
   const rekomendationData = {
-    user_id: req.body.user_id,
     title: req.body.title,
     harga: req.body.harga,
     description: req.body.description,

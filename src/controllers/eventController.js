@@ -29,7 +29,6 @@ const getEventAllById = async (req, res) => {
 
 const createEvent = async (req, res) => {
   const eventData = {
-    user_id: req.body.user_id,
     title: req.body.title,
     description: req.body.description,
     photo: req.file.filename,
@@ -51,7 +50,6 @@ const createEvent = async (req, res) => {
 
 const updateEvent = async (req, res) => {
   const eventData = {
-    user_id: req.body.user_id,
     title: req.body.title,
     description: req.body.description,
     photo: req.file.filename,

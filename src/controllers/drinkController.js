@@ -29,7 +29,6 @@ const getDrinkAllById = async (req, res) => {
 
 const createDrink = async (req, res) => {
   const drinkData = {
-    user_id: req.body.user_id,
     title: req.body.title,
     harga: req.body.harga,
     photo: req.file.filename,
@@ -51,7 +50,6 @@ const createDrink = async (req, res) => {
 
 const updateDrink = async (req, res) => {
   const drinkData = {
-    user_id: req.body.user_id,
     title: req.body.title,
     harga: req.body.harga,
     photo: req.file.filename,
