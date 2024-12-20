@@ -15,7 +15,7 @@ module.exports = {
       harga: {
         type: Sequelize.INTEGER
       },
-      foto: {
+      photo: {
         type: Sequelize.STRING
       },
       createdAt: {

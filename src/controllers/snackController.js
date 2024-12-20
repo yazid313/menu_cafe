@@ -29,7 +29,6 @@ const getSnackAllById = async (req, res) => {
 
 const createSnack = async (req, res) => {
   const snackData = {
-    user_id: req.body.user_id,
     title: req.body.title,
     harga: req.body.harga,
     photo: req.file.filename,
@@ -51,7 +50,6 @@ const createSnack = async (req, res) => {
 
 const updateSnack = async (req, res) => {
   const snackData = {
-    user_id: req.body.user_id,
     title: req.body.title,
     harga: req.body.harga,
     photo: req.file.filename,
