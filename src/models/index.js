@@ -20,7 +20,7 @@ const drinkControl = db.define("drink", drink, {
   tableName: "drinks",
 });
 const foodControl = db.define("food", food, {
-  tableName: "food",
+  tableName: "foods",
 });
 const rekomendationControl = db.define("rekomendation", rekomendation, {
   tableName: "rekomendations",
