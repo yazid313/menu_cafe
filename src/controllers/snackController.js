@@ -31,7 +31,7 @@ const createSnack = async (req, res) => {
   const snackData = {
     title: req.body.title,
     harga: req.body.harga,
-    photo: req.file.filename,
+    photo: req.file ? req.file.filename : req.body.photo,
   };
   try {
     const newSnack = await snackControl.create(snackData);

@@ -52,7 +52,7 @@ const updateDrink = async (req, res) => {
   const drinkData = {
     title: req.body.title,
     harga: req.body.harga,
-    photo: req.file.filename,
+    photo: req.file ? req.file.filename : req.body.photo,
   };
   try {
     const newDrink = await drinkControl.update(drinkData, {

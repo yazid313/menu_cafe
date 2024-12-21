@@ -52,7 +52,7 @@ const updateEvent = async (req, res) => {
   const eventData = {
     title: req.body.title,
     description: req.body.description,
-    photo: req.file.filename,
+    photo: req.file ? req.file.filename : req.body.photo,
   };
   try {
     const newEvent = await eventControl.update(eventData, {

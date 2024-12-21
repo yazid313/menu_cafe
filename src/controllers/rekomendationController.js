@@ -56,7 +56,7 @@ const updateRekomendation = async (req, res) => {
     title: req.body.title,
     harga: req.body.harga,
     description: req.body.description,
-    photo: req.file.filename,
+    photo: req.file ? req.file.filename : req.body.photo,
   };
   try {
     const newRekomendation = await rekomendationControl.update(
