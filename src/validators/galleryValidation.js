@@ -1,10 +1,10 @@
-import { rekomendationControl } from "../models/index.js";
+import { galleryControl } from "../models/index.js";
 import fs from "fs";
 
-const rekomendationIdValidator = async (req, res, next) => {
+const galleryIdValidator = async (req, res, next) => {
   try {
     // Gunakan Sequelize untuk mencari user berdasarkan user_id
-    const respon = await rekomendationControl.findOne({
+    const respon = await galleryControl.findOne({
       where: {
         id: req.params.id,
       },
@@ -26,7 +26,7 @@ const rekomendationIdValidator = async (req, res, next) => {
 
 const updateImageValidator = async (req, res, next) => {
   try {
-    const respon = await rekomendationControl.findOne({
+    const respon = await galleryControl.findOne({
       attributes: ["photo"],
       where: {
         id: req.params.id,
@@ -47,7 +47,7 @@ const updateImageValidator = async (req, res, next) => {
 
 const deleteImageValidator = async (req, res, next) => {
   try {
-    const respon = await rekomendationControl.findOne({
+    const respon = await galleryControl.findOne({
       attributes: ["photo"],
       where: {
         id: req.params.id,
@@ -71,7 +71,7 @@ const deleteIdValidator = async (req, res, next) => {
 
   try {
     // Gunakan Sequelize untuk mencari user berdasarkan user_id
-    const respon = await rekomendationControl.findByPk(id);
+    const respon = await galleryControl.findByPk(id);
 
     if (!respon) {
       return res.status(401).json({ message: "id Tidak Terdaftar!" });
@@ -84,7 +84,7 @@ const deleteIdValidator = async (req, res, next) => {
 };
 
 export {
-  rekomendationIdValidator,
+  galleryIdValidator,
   updateImageValidator,
   deleteIdValidator,
   deleteImageValidator,

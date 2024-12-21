@@ -4,7 +4,7 @@ import token from "./akses_token.js";
 import event from "./event.js";
 import drink from "./drink.js";
 import food from "./food.js";
-import rekomendation from "./rekomendation.js";
+import gallery from "./gallery.js";
 import snack from "./snack.js";
 
 const userControl = db.define("user", user, {
@@ -22,8 +22,8 @@ const drinkControl = db.define("drink", drink, {
 const foodControl = db.define("food", food, {
   tableName: "foods",
 });
-const rekomendationControl = db.define("rekomendation", rekomendation, {
-  tableName: "rekomendations",
+const galleryControl = db.define("gallery", gallery, {
+  tableName: "gallerys",
 });
 const snackControl = db.define("snack", snack, {
   tableName: "snacks",
@@ -49,6 +49,6 @@ export {
   eventControl,
   drinkControl,
   foodControl,
-  rekomendationControl,
+  galleryControl,
   snackControl,
 };
