@@ -27,14 +27,14 @@ const eventIdValidator = async (req, res, next) => {
 const updateImageValidator = async (req, res, next) => {
   try {
     const respon = await eventControl.findOne({
-      attributes: ["icon"],
+      attributes: ["photo"],
       where: {
         id: req.params.id,
       },
     });
 
     if (req.file) {
-      const result = respon.icon;
+      const result = respon.photo;
       if (fs.existsSync(`images/${result}`)) {
         fs.unlinkSync(`images/${result}`);
       }
@@ -48,14 +48,14 @@ const updateImageValidator = async (req, res, next) => {
 const deleteImageValidator = async (req, res, next) => {
   try {
     const respon = await eventControl.findOne({
-      attributes: ["icon"],
+      attributes: ["photo"],
       where: {
         id: req.params.id,
       },
     });
 
-    if (respon.icon) {
-      const result = respon.icon;
+    if (respon.photo) {
+      const result = respon.photo;
       if (fs.existsSync(`images/${result}`)) {
         fs.unlinkSync(`images/${result}`);
       }

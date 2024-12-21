@@ -21,7 +21,7 @@ router.get("/:id", getEventAllById);
 router.post("/create", upload.single("photo"), createEvent);
 router.put(
   "/update/:id",
-  upload.single("icon"),
+  upload.single("photo"),
   eventIdValidator,
   updateImageValidator,
   updateEvent
