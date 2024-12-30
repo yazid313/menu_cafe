@@ -14,15 +14,23 @@ import {
   deleteImageValidator,
 } from "../validators/foodValidation.js";
 import { verifikasi2 } from "../validators/loginValidation.js";
+import { outletIdValidator } from "../validators/drinkValidation.js";
 
 const router = Router();
 
 router.get("/", getFoodAll);
 router.get("/:id", getFoodAllById);
-router.post("/create", upload.single("photo"), verifikasi2, createFood);
+router.post(
+  "/create",
+  upload.single("photo"),
+  verifikasi2,
+  outletIdValidator,
+  createFood
+);
 router.put(
   "/update/:id",
   upload.single("photo"),
+  outletIdValidator,
   verifikasi2,
   foodIdValidator,
   updateImageValidator,

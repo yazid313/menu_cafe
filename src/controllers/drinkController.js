@@ -29,6 +29,7 @@ const getDrinkAllById = async (req, res) => {
 
 const createDrink = async (req, res) => {
   const drinkData = {
+    outlet_id: req.body.outlet_id,
     title: req.body.title,
     harga: req.body.harga,
     photo: req.file.filename,
@@ -50,6 +51,7 @@ const createDrink = async (req, res) => {
 
 const updateDrink = async (req, res) => {
   const drinkData = {
+    outlet_id: req.body.outlet_id,
     title: req.body.title,
     harga: req.body.harga,
     photo: req.file ? req.file.filename : req.body.photo,

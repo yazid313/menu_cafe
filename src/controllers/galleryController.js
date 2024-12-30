@@ -29,6 +29,7 @@ const getGalleryAllById = async (req, res) => {
 
 const createGallery = async (req, res) => {
   const galleryData = {
+    outlet_id: req.body.outlet_id,
     title: req.body.title,
     photo: req.file ? req.file.filename : req.body.photo,
   };
@@ -49,6 +50,7 @@ const createGallery = async (req, res) => {
 
 const updateGallery = async (req, res) => {
   const galleryData = {
+    outlet_id: req.body.outlet_id,
     title: req.body.title,
     photo: req.file ? req.file.filename : req.body.photo,
   };

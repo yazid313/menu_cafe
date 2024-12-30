@@ -1,5 +1,13 @@
 import { Sequelize, DataTypes } from "sequelize";
 const drink = {
+  outlet_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      notEmpty: { args: true, msg: "tidak boleh null name" },
+      notNull: { args: true, msg: "tidak boleh null name" },
+    },
+  },
   title: {
     type: DataTypes.STRING,
     allowNull: false,

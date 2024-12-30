@@ -1,4 +1,4 @@
-import { drinkControl } from "../models/index.js";
+import { drinkControl, outletControl } from "../models/index.js";
 import fs from "fs";
 
 const drinkIdValidator = async (req, res, next) => {
@@ -21,6 +21,27 @@ const drinkIdValidator = async (req, res, next) => {
     next();
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+const outletIdValidator = async (req, res, next) => {
+  try {
+    const respon = await outletControl.findOne({
+      where: {
+        id: req.body.outlet_id,
+      },
+    });
+    if (!respon) {
+      const result = req.file.filename;
+      if (fs.existsSync(`images/${result}`)) {
+        fs.unlinkSync(`images/${result}`);
+      }
+      return res.status(401).json({ massage: "outlet_id Tidak Terdaftar!" });
+    }
+    next();
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+    console.log(err);
   }
 };
 
@@ -84,6 +105,7 @@ const deleteIdValidator = async (req, res, next) => {
 };
 
 export {
+  outletIdValidator,
   drinkIdValidator,
   updateImageValidator,
   deleteIdValidator,

@@ -29,6 +29,7 @@ const getFoodAllById = async (req, res) => {
 
 const createFood = async (req, res) => {
   const foodData = {
+    outlet_id: req.body.outlet_id,
     title: req.body.title,
     harga: req.body.harga,
     photo: req.file.filename,
@@ -50,6 +51,7 @@ const createFood = async (req, res) => {
 
 const updateFood = async (req, res) => {
   const foodData = {
+    outlet_id: req.body.outlet_id,
     title: req.body.title,
     harga: req.body.harga,
     photo: req.file ? req.file.filename : req.body.photo,

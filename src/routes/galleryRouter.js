@@ -14,16 +14,24 @@ import {
   deleteImageValidator,
 } from "../validators/galleryValidation.js";
 import { verifikasi2 } from "../validators/loginValidation.js";
+import { outletIdValidator } from "../validators/drinkValidation.js";
 
 const router = Router();
 
 router.get("/", getGalleryAll);
 router.get("/:id", getGalleryAllById);
-router.post("/create", upload.single("photo"), verifikasi2, createGallery);
+router.post(
+  "/create",
+  upload.single("photo"),
+  verifikasi2,
+  outletIdValidator,
+  createGallery
+);
 router.put(
   "/update/:id",
   upload.single("photo"),
   verifikasi2,
+  outletIdValidator,
   galleryIdValidator,
   updateImageValidator,
   updateGallery

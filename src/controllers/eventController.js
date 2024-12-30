@@ -29,6 +29,7 @@ const getEventAllById = async (req, res) => {
 
 const createEvent = async (req, res) => {
   const eventData = {
+    outlet_id: req.body.outlet_id,
     title: req.body.title,
     description: req.body.description,
     photo: req.file.filename,
@@ -50,6 +51,7 @@ const createEvent = async (req, res) => {
 
 const updateEvent = async (req, res) => {
   const eventData = {
+    outlet_id: req.body.outlet_id,
     title: req.body.title,
     description: req.body.description,
     photo: req.file ? req.file.filename : req.body.photo,
