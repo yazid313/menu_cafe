@@ -1,8 +1,8 @@
 import { Sequelize, DataTypes } from "sequelize";
 
 const gallery = {
-  nama_outlet: {
-    type: DataTypes.STRING,
+  outlet_id: {
+    type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
       notEmpty: { args: true, msg: "tidak boleh null name" },
