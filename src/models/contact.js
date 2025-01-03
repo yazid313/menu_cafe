@@ -5,8 +5,8 @@ const contact = {
     type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
-      notEmpty: { args: true, msg: "tidak boleh null " },
-      notNull: { args: true, msg: "tidak boleh null " },
+      notEmpty: { args: true, msg: "tidak boleh null id outlet " },
+      notNull: { args: true, msg: "tidak boleh null id outlet" },
     },
   },
   nama_contact: {

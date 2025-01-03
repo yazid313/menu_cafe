@@ -1,4 +1,4 @@
-import { profileControl } from "../models/index.js";
+import { outletControl, profileControl } from "../models/index.js";
 import fs from "fs";
 
 const getProfileAll = async (req, res) => {
@@ -15,6 +15,29 @@ const getProfileAllById = async (req, res) => {
       where: {
         id: req.params.id,
       },
+    });
+
+    if (!respon) {
+      return res.status(401).json({ massage: "id Tidak Terdaftar!" });
+    } else {
+      res.status(200).json(respon);
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+const getProfileAllByNamaOutlet = async (req, res) => {
+  try {
+    const respon = await profileControl.findAll({
+      include: [
+        {
+          model: outletControl,
+          required: false, // Mengatur menjadi LEFT JOIN
+          where: {
+            nama_outlet: req.params.nama_outlet,
+          },
+        },
+      ],
     });
 
     if (!respon) {
@@ -93,6 +116,7 @@ const deleteProfileById = async (req, res) => {
 export {
   getProfileAll,
   getProfileAllById,
+  getProfileAllByNamaOutlet,
   createProfile,
   updateProfile,
   deleteProfileById,

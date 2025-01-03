@@ -36,5 +36,13 @@ const outlet = {
       this.setDataValue("password", encrypt(value, 10));
     },
   },
+  role: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: { args: true, msg: "tidak boleh null role" },
+      notNull: { args: true, msg: "tidak boleh null role" },
+    },
+  },
 };
 export default outlet;

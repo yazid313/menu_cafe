@@ -5,6 +5,7 @@ import {
   createSnack,
   deleteSnackById,
   updateSnack,
+  getSnackAllByNamaOutlet,
 } from "../controllers/snackController.js";
 import upload from "../validators/imageValidation.js";
 import {
@@ -20,6 +21,7 @@ const router = Router();
 
 router.get("/", getSnackAll);
 router.get("/:id", getSnackAllById);
+router.get("/byNamaOutlet/:nama_outlet", getSnackAllByNamaOutlet);
 router.post(
   "/create",
   upload.single("photo"),

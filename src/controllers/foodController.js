@@ -1,4 +1,4 @@
-import { foodControl } from "../models/index.js";
+import { foodControl, outletControl } from "../models/index.js";
 import fs from "fs";
 
 const getFoodAll = async (req, res) => {
@@ -15,6 +15,29 @@ const getFoodAllById = async (req, res) => {
       where: {
         id: req.params.id,
       },
+    });
+
+    if (!respon) {
+      return res.status(401).json({ massage: "id Tidak Terdaftar!" });
+    } else {
+      res.status(200).json(respon);
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+const getFoodAllByNamaOutlet = async (req, res) => {
+  try {
+    const respon = await foodControl.findAll({
+      include: [
+        {
+          model: outletControl,
+          required: false, // Mengatur menjadi LEFT JOIN
+          where: {
+            nama_outlet: req.params.nama_outlet,
+          },
+        },
+      ],
     });
 
     if (!respon) {
@@ -88,4 +111,11 @@ const deleteFoodById = async (req, res) => {
   }
 };
 
-export { getFoodAll, getFoodAllById, createFood, updateFood, deleteFoodById };
+export {
+  getFoodAll,
+  getFoodAllById,
+  getFoodAllByNamaOutlet,
+  createFood,
+  updateFood,
+  deleteFoodById,
+};

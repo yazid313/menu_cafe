@@ -7,6 +7,7 @@ import {
   deleteProfileById,
   getProfileAll,
   getProfileAllById,
+  getProfileAllByNamaOutlet,
   updateProfile,
 } from "../controllers/profileController.js";
 import {
@@ -20,6 +21,7 @@ const router = Router();
 
 router.get("/", getProfileAll);
 router.get("/:id", getProfileAllById);
+router.get("/byNamaOutlet/:nama_outlet", getProfileAllByNamaOutlet);
 router.post(
   "/create",
   upload.single("logo"),

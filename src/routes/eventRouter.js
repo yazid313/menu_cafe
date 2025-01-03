@@ -5,6 +5,7 @@ import {
   createEvent,
   updateEvent,
   deleteEventById,
+  getEventAllByNamaOutlet,
 } from "../controllers/eventController.js";
 import upload from "../validators/imageValidation.js";
 import {
@@ -20,6 +21,7 @@ const router = Router();
 
 router.get("/", getEventAll);
 router.get("/:id", getEventAllById);
+router.get("/byNamaOutlet/:nama_outlet", getEventAllByNamaOutlet);
 router.post(
   "/create",
   upload.single("photo"),

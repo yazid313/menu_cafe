@@ -4,8 +4,8 @@ const drink = {
     type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
-      notEmpty: { args: true, msg: "tidak boleh null name" },
-      notNull: { args: true, msg: "tidak boleh null name" },
+      notEmpty: { args: true, msg: "tidak boleh null id outlet " },
+      notNull: { args: true, msg: "tidak boleh null id outlet" },
     },
   },
   title: {

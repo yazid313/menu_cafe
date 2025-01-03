@@ -1,4 +1,4 @@
-import { contactControl } from "../models/index.js";
+import { contactControl, outletControl } from "../models/index.js";
 import fs from "fs";
 
 const getContactAll = async (req, res) => {
@@ -15,6 +15,30 @@ const getContactAllById = async (req, res) => {
       where: {
         id: req.params.id,
       },
+    });
+
+    if (!respon) {
+      return res.status(401).json({ massage: "id Tidak Terdaftar!" });
+    } else {
+      res.status(200).json(respon);
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+const getContactByNamaOutlet = async (req, res) => {
+  try {
+    const respon = await contactControl.findAll({
+      include: [
+        {
+          model: outletControl,
+          required: false, // Mengatur menjadi LEFT JOIN
+          where: {
+            nama_outlet: req.params.nama_outlet,
+          },
+        },
+      ],
     });
 
     if (!respon) {
@@ -91,6 +115,7 @@ const deleteContactById = async (req, res) => {
 export {
   getContactAll,
   getContactAllById,
+  getContactByNamaOutlet,
   createContact,
   updateContact,
   deleteContactById,

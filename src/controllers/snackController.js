@@ -1,4 +1,4 @@
-import { snackControl } from "../models/index.js";
+import { outletControl, snackControl } from "../models/index.js";
 import fs from "fs";
 
 const getSnackAll = async (req, res) => {
@@ -15,6 +15,29 @@ const getSnackAllById = async (req, res) => {
       where: {
         id: req.params.id,
       },
+    });
+
+    if (!respon) {
+      return res.status(401).json({ massage: "id Tidak Terdaftar!" });
+    } else {
+      res.status(200).json(respon);
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+const getSnackAllByNamaOutlet = async (req, res) => {
+  try {
+    const respon = await snackControl.findAll({
+      include: [
+        {
+          model: outletControl,
+          required: false, // Mengatur menjadi LEFT JOIN
+          where: {
+            nama_outlet: req.params.nama_outlet,
+          },
+        },
+      ],
     });
 
     if (!respon) {
@@ -91,6 +114,7 @@ const deleteSnackById = async (req, res) => {
 export {
   getSnackAll,
   getSnackAllById,
+  getSnackAllByNamaOutlet,
   createSnack,
   updateSnack,
   deleteSnackById,

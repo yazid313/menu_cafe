@@ -1,6 +1,8 @@
 import { outletControl } from "../models/index.js";
 
 const createNamaOutletValidator = async (req, res, next) => {
+  console.log(req.body, "pppppp");
+
   const respon = await outletControl.findOne({
     attributes: ["nama_outlet"],
     where: {

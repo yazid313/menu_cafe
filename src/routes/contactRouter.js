@@ -7,6 +7,7 @@ import {
   deleteContactById,
   getContactAll,
   getContactAllById,
+  getContactByNamaOutlet,
   updateContact,
 } from "../controllers/contactController.js";
 import {
@@ -20,6 +21,7 @@ const router = Router();
 
 router.get("/", getContactAll);
 router.get("/:id", getContactAllById);
+router.get("/byNamaOutlet/:nama_outlet", getContactByNamaOutlet);
 router.post(
   "/create",
   upload.single("logo"),

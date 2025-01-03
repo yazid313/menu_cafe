@@ -33,6 +33,7 @@ const createOutlet = async (req, res) => {
     nama_outlet: req.body.nama_outlet,
     email: req.body.email,
     password: req.body.password,
+    role: req.body.role,
   };
   try {
     const newOutlet = await outletControl.create(outletData);
@@ -47,6 +48,7 @@ const updateOutlet = async (req, res) => {
     nama_outlet: req.body.nama_outlet,
     email: req.body.email,
     password: req.body.password,
+    role: req.body.role,
   };
   try {
     const newOutlet = await outletControl.update(outletData, {

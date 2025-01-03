@@ -1,4 +1,4 @@
-import { eventControl } from "../models/index.js";
+import { eventControl, outletControl } from "../models/index.js";
 import fs from "fs";
 
 const getEventAll = async (req, res) => {
@@ -15,6 +15,29 @@ const getEventAllById = async (req, res) => {
       where: {
         id: req.params.id,
       },
+    });
+
+    if (!respon) {
+      return res.status(401).json({ massage: "id Tidak Terdaftar!" });
+    } else {
+      res.status(200).json(respon);
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+const getEventAllByNamaOutlet = async (req, res) => {
+  try {
+    const respon = await eventControl.findAll({
+      include: [
+        {
+          model: outletControl,
+          required: false, // Mengatur menjadi LEFT JOIN
+          where: {
+            nama_outlet: req.params.nama_outlet,
+          },
+        },
+      ],
     });
 
     if (!respon) {
@@ -91,6 +114,7 @@ const deleteEventById = async (req, res) => {
 export {
   getEventAll,
   getEventAllById,
+  getEventAllByNamaOutlet,
   createEvent,
   updateEvent,
   deleteEventById,

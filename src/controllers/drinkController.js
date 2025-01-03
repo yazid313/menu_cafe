@@ -1,4 +1,4 @@
-import { drinkControl } from "../models/index.js";
+import { drinkControl, outletControl } from "../models/index.js";
 import fs from "fs";
 
 const getDrinkAll = async (req, res) => {
@@ -15,6 +15,29 @@ const getDrinkAllById = async (req, res) => {
       where: {
         id: req.params.id,
       },
+    });
+
+    if (!respon) {
+      return res.status(401).json({ massage: "id Tidak Terdaftar!" });
+    } else {
+      res.status(200).json(respon);
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+const getDrinkAllByNamaOutlet = async (req, res) => {
+  try {
+    const respon = await drinkControl.findAll({
+      include: [
+        {
+          model: outletControl,
+          required: false, // Mengatur menjadi LEFT JOIN
+          where: {
+            nama_outlet: req.params.nama_outlet,
+          },
+        },
+      ],
     });
 
     if (!respon) {
@@ -91,6 +114,7 @@ const deleteDrinkById = async (req, res) => {
 export {
   getDrinkAll,
   getDrinkAllById,
+  getDrinkAllByNamaOutlet,
   createDrink,
   updateDrink,
   deleteDrinkById,

@@ -5,6 +5,7 @@ import {
   createDrink,
   deleteDrinkById,
   updateDrink,
+  getDrinkAllByNamaOutlet,
 } from "../controllers/drinkController.js";
 import upload from "../validators/imageValidation.js";
 import {
@@ -20,6 +21,7 @@ const router = Router();
 
 router.get("/", getDrinkAll);
 router.get("/:id", getDrinkAllById);
+router.get("/byNamaOutlet/:nama_outlet", getDrinkAllByNamaOutlet);
 router.post(
   "/create",
   upload.single("photo"),

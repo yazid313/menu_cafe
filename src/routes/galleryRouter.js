@@ -5,6 +5,7 @@ import {
   createGallery,
   updateGallery,
   deleteGalleryById,
+  getGalleryAllByNamaOutlet,
 } from "../controllers/galleryController.js";
 import upload from "../validators/imageValidation.js";
 import {
@@ -20,6 +21,7 @@ const router = Router();
 
 router.get("/", getGalleryAll);
 router.get("/:id", getGalleryAllById);
+router.get("/byNamaOutlet/:nama_outlet", getGalleryAllByNamaOutlet);
 router.post(
   "/create",
   upload.single("photo"),
