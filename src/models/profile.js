@@ -25,7 +25,7 @@ const profile = {
     },
   },
   history: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
     validate: {
       notEmpty: { args: true, msg: "tidak boleh null name" },

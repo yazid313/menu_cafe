@@ -7,6 +7,7 @@ import drinkRoute from "./drinkRouter.js";
 import snackRoute from "./snackRouter.js";
 import galleryRoute from "./galleryRouter.js";
 import eventRoute from "./eventRouter.js";
+import rekomendationRoute from "./rekomendationRouter.js";
 
 export default (app) => {
   app.use("/api/v1/outlet", outletRoute);
@@ -18,4 +19,5 @@ export default (app) => {
   app.use("/api/v1/snack", snackRoute);
   app.use("/api/v1/gallery", galleryRoute);
   app.use("/api/v1/event", eventRoute);
+  app.use("/api/v1/rekomendation", rekomendationRoute);
 };

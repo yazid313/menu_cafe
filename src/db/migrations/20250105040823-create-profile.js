@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       history: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       logo: {
         type: Sequelize.STRING

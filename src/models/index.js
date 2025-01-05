@@ -8,6 +8,7 @@ import gallery from "./gallery.js";
 import snack from "./snack.js";
 import profile from "./profile.js";
 import contact from "./contact.js";
+import rekomendation from "./rekomendation.js";
 
 const outletControl = db.define("outlet", outlet, {
   tableName: "outlets",
@@ -36,6 +37,9 @@ const galleryControl = db.define("gallery", gallery, {
 });
 const snackControl = db.define("snack", snack, {
   tableName: "snacks",
+});
+const rekomendationControl = db.define("rekomendation", rekomendation, {
+  tableName: "rekomendations",
 });
 
 outletControl.hasMany(profileControl, {
@@ -133,6 +137,18 @@ snackControl.belongsTo(outletControl, {
   onDelete: "RESTRICT",
   onUpdate: "RESTRICT",
 });
+
+outletControl.hasMany(rekomendationControl, {
+  foreignKey: "outlet_id",
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+});
+
+rekomendationControl.belongsTo(outletControl, {
+  foreignKey: "outlet_id",
+  onDelete: "RESTRICT",
+  onUpdate: "RESTRICT",
+});
 db.sync();
 
 export {
@@ -145,4 +161,5 @@ export {
   foodControl,
   galleryControl,
   snackControl,
+  rekomendationControl,
 };
